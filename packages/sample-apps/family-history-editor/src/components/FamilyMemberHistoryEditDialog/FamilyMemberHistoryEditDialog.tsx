@@ -3,8 +3,8 @@ import { Modal, Button } from "react-bootstrap";
 import { FHIRr4 } from "plasma-fhir-react-components";
 import { 
     FamilyMemberHistory, FamilyMemberHistoryCondition, CodeableConcept, Age, Coding,
-    AdministrativeGender, FamilyMemberHistory_Relationship 
-} from "../../plasma-fhir/api/FHIRResourceHelpers";
+    AdministrativeGender, FamilyMemberRoleCodes 
+} from "../../plasma-fhir/api";
 
 export interface IFamilyMemberHistoryEditDialogProps {
     familyMemberHistory: FamilyMemberHistory | null;
@@ -21,7 +21,7 @@ export interface IFamilyMemberHistoryEditDialogProps {
 
 export default function FamilyMemberHistoryEditDialog(props: IFamilyMemberHistoryEditDialogProps) {
     const [name, setName] = useState<string>("");
-    const [relationship, setRelationship] = useState<Coding>(FamilyMemberHistory_Relationship.Father);
+    const [relationship, setRelationship] = useState<Coding>(FamilyMemberRoleCodes.NFTHF);
     const [sex, setSex] = useState<Coding | null>(null);
 
     useEffect(() => {
@@ -34,7 +34,7 @@ export default function FamilyMemberHistoryEditDialog(props: IFamilyMemberHistor
         if (props.familyMemberHistory && props.familyMemberHistory.relationship && props.familyMemberHistory.relationship.coding) {
             setRelationship(props.familyMemberHistory.relationship.coding[0]);
         } else {
-            setRelationship(FamilyMemberHistory_Relationship.Father);
+            setRelationship(FamilyMemberRoleCodes.NFTHF);
         }
 
         if (props.familyMemberHistory && props.familyMemberHistory.sex && props.familyMemberHistory.sex.coding) {
@@ -57,7 +57,7 @@ export default function FamilyMemberHistoryEditDialog(props: IFamilyMemberHistor
             /><br /><br />
             
             <FHIRr4.CodingSelector 
-                codes={Object.keys(FamilyMemberHistory_Relationship).map((key) => (FamilyMemberHistory_Relationship as any)[key])} 
+                codes={Object.keys(FamilyMemberRoleCodes).map((key) => (FamilyMemberRoleCodes as any)[key])} 
                 selectedCode={relationship}
                 onChange={(code: Coding) => setRelationship(code)} 
             /><br /><br />

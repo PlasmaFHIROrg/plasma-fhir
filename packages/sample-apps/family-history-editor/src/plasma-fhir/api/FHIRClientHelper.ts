@@ -2,9 +2,10 @@ import { fhirclient } from "fhirclient/lib/types";
 import Client from "fhirclient/lib/Client";
 import * as r4 from "fhir/r4";
 import * as PlasmaFHIR from "./FHIRResourceHelpers";
+import { FamilyMemberHistory } from "./FHIRFamilyMemberHistory";
 
-export function getFamilyMemberHistory(fhirClient: Client): Promise<PlasmaFHIR.FamilyMemberHistory[]> {
-    return getResource<PlasmaFHIR.FamilyMemberHistory>(fhirClient, "FamilyMemberHistory");
+export function getFamilyMemberHistory(fhirClient: Client): Promise<FamilyMemberHistory[]> {
+    return getResource<FamilyMemberHistory>(fhirClient, "FamilyMemberHistory");
 }
 
 export function getAllergyIntolerance(fhirClient: Client): Promise<PlasmaFHIR.AllergyIntolerance[]> {

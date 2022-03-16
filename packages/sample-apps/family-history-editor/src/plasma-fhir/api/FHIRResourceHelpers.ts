@@ -1,5 +1,4 @@
 import * as r4 from "fhir/r4";
-
 //
 // REFERENCE
 //
@@ -183,34 +182,6 @@ export const AdministrativeGender = {
     Unknown:    new Coding("http://hl7.org/fhir/administrative-gender", "unknown",  "Unknown"),
 };
 
-// TODO: We can get these values from here: https://terminology.hl7.org/3.1.0/CodeSystem-v3-RoleCode.json.html
-export const FamilyMemberHistory_Relationship = {
-    Mother:     new Coding("http://terminology.hl7.org/CodeSystem/v3-RoleCode", "MTH", "mother"),
-    Father:     new Coding("http://terminology.hl7.org/CodeSystem/v3-RoleCode", "FTH", "father"),
-    Son:        new Coding("http://terminology.hl7.org/CodeSystem/v3-RoleCode", "SON", "natural son"),
-    Daughter:   new Coding("http://terminology.hl7.org/CodeSystem/v3-RoleCode", "DAU", "natural daughter"),
-}
-
-export interface FamilyMemberHistory extends r4.FamilyMemberHistory { }
-export class FamilyMemberHistory {
-    constructor(patientId: string, id: string, relationship: keyof typeof FamilyMemberHistory_Relationship | Coding) {
-        this.resourceType = "FamilyMemberHistory";
-        this.status = "completed";
-        this.relationship = (typeof relationship === "string") 
-            ? CodeableConcept.fromSingleCoding(FamilyMemberHistory_Relationship[relationship])
-            : CodeableConcept.fromSingleCoding(relationship);
-        this.patient = FamilyMemberHistory.createPatientReference(patientId);
-
-        this.id = id;
-        this.condition = [];
-    }
-
-    // Create a FamilyMemberHistory.patient value...
-    private static createPatientReference(patientId: string): Reference {
-        return new Reference("Patient/" + patientId);
-    }
-}
-
 //
 // FAMILYMEMBERHISTORYCONDITION
 //
@@ -229,3 +200,5 @@ export class FamilyMemberHistoryCondition {
         return condition;
     }
 }
+
+

@@ -10,8 +10,8 @@ import { FHIRr4 } from "plasma-fhir-react-components";
 import { FHIRClientContext } from "../plasma-fhir/FHIRClient";
 import * as FHIRClientHelper from '../plasma-fhir/api/FHIRClientHelper';
 import { FamilyMemberHistory, FamilyMemberHistoryCondition, CodeableConcept, Age, Coding,
-    AdministrativeGender, FamilyMemberHistory_Relationship 
-} from "../plasma-fhir/api/FHIRResourceHelpers";
+    AdministrativeGender, FamilyMemberRoleCodes 
+} from "../plasma-fhir/api";
 
 interface ITestScreenProps { };
 function TestScreen(props: ITestScreenProps) {
@@ -242,17 +242,17 @@ function TestScreen(props: ITestScreenProps) {
 
 // Creates and returns a test family...
 const createTestFamily = (patientId: string): FamilyMemberHistory[] => {
-    const father = new FamilyMemberHistory(patientId, "R_01", "Father");
+    const father = new FamilyMemberHistory(patientId, "R_01", "NFTHF");
     father.name = "John";
     father.sex = AdministrativeGender.Male;
     father.ageAge = Age.fromYears(60);
 
-    const mother = new FamilyMemberHistory(patientId, "R_02", "Mother");
+    const mother = new FamilyMemberHistory(patientId, "R_02", "NMTHF");
     mother.name = "Mary";
     mother.sex = AdministrativeGender.Female;
     mother.ageAge = Age.fromYears(58);
 
-    const son = new FamilyMemberHistory(patientId, "R_03", "Son");
+    const son = new FamilyMemberHistory(patientId, "R_03", "SON");
     son.name = "Tim";
     son.sex = AdministrativeGender.Male;
     son.ageAge = Age.fromYears(25);
